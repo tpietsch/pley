@@ -1,0 +1,74 @@
+<html >
+	<head>
+	
+	
+	<link href="/pley/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/pley/css/font-awesome.min.css" rel="stylesheet">
+	
+	<script type="text/javascript" src="/pley/js/jquery-2.1.1.min.js"></script>
+	<script  type="text/javascript"  src="/pley/js/angular.min.js"></script>
+	<script  type="text/javascript" src="/pley/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
+	var myApp = angular.module('myApp',[]);
+
+	myApp.controller('RegisterController', ['$scope', '$http' , function($scope,$http) {
+		
+		var json = {};
+		
+		 $scope.create = function() {
+			 
+			 json["firstname"]="trever";
+			 json["lastname"] = "pietsch";
+			 json["emai"] ="treverp@gmail.com";
+			 json.["password"] = "treverpasswords";
+		
+		 //validate fields
+			
+		 $http({method: 'POST', url: '/pley/Create', data:json.toString() ,headers: {'Content-Type': 'application/x-www-form-urlencoded'}	
+		 }).
+		    success(function(data, status, headers, config) {
+		      // this callback will be called asynchronously
+		      // when the response is available
+		      $scope.greeting = data;
+		    }).
+		    error(function(data, status, headers, config) {
+		      // called asynchronously if an error occurs
+		      // or server returns response with an error status.
+		    });
+		  };
+		  
+	}]);
+	
+	</script>
+	</head>
+
+	<body ng-app="myApp">
+	
+		
+  
+ 	 		<h2 class="form-signin-heading">Create Account</h2>
+  
+  			<input id="firstnamefield" class="form-control" type="text" name="firstname" placeholder="First Name"  autofocus/>
+  			<br/>
+  	
+  			<input id="lastnamefield" class="form-control" type="text" name="lastname"  placeholder="Last Name"  autofocus/>  
+  			<br/>       
+  	
+ 			<input id="emailfield" class="form-control" type="email" name="email" placeholder="Email"   autofocus/>
+ 			<br/>
+ 	
+ 			<input id="passwordfield"  class="form-control" type="password" placeholder="Password" name="password"  autofocus/>
+ 			<br/>
+  
+			<button class="btn btn-lg btn-primary btn-block" ng-click="create()">
+ 				Create
+			</button>
+	
+		
+	
+	</body>
+
+	<footer>
+	</footer>	
+</html>
